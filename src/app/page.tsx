@@ -87,12 +87,8 @@ export default function HomePage() {
 
       {/* NAV */}
       <nav className="sticky top-0 z-40 border-b border-[#2a2a50] bg-[#0d0d1a]/80 backdrop-blur-xl px-10 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center text-xl">🏥</div>
-          <div>
-            <div className="text-lg font-extrabold tracking-tight">Med<span className="text-pink-500">Sync</span></div>
-            <div className="text-[10px] text-gray-500 -mt-0.5">Synchronizing Health Care</div>
-          </div>
+        <div className="flex items-center">
+          <img src="/medsync-logo.png" alt="MedSync" style={{ width: '210px', height: 'auto', objectFit: 'contain' }} />
         </div>
         <div className="flex gap-3">
           <button onClick={() => openPortal('patient')} className="px-4 py-2 rounded-lg border border-[#2a2a50] text-gray-400 text-sm font-medium hover:border-teal-500 hover:text-white transition-all">Patient Login</button>

@@ -11,6 +11,8 @@ interface SidebarProps {
     onSignOut: () => void;
 }
 
+import Image from 'next/image';
+
 const navItems: Record<UserRole, { icon: string; label: string; section: string }[]> = {
     doctor: [
         { icon: '🏠', label: 'Dashboard', section: 'dashboard' },
@@ -58,12 +60,9 @@ export default function Sidebar({ role, userName, activeSection, onSectionChange
     return (
         <aside className="w-60 flex-shrink-0 bg-[#10102a] border-r border-[#2a2a50] flex flex-col min-h-screen fixed top-0 left-0 bottom-0 z-30">
             {/* Logo */}
-            <div className="px-4 py-5 border-b border-[#2a2a50] flex items-center gap-3">
-                <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${roleColors[role]} flex items-center justify-center text-lg flex-shrink-0`}>🏥</div>
-                <div>
-                    <div className="text-base font-extrabold">Med<span className="text-pink-500">Sync</span></div>
-                    <div className="text-[10px] text-gray-500">{roleTitles[role]}</div>
-                </div>
+            <div className="px-5 py-4 border-b border-[#2a2a50] flex flex-col justify-center">
+                <img src="/medsync-logo.png" alt="MedSync" style={{ width: '170px', height: 'auto', objectFit: 'contain' }} className="mb-2" />
+                <div className="text-[10px] text-gray-500 tracking-widest uppercase font-semibold">{roleTitles[role]}</div>
             </div>
 
             {/* User */}
@@ -85,8 +84,8 @@ export default function Sidebar({ role, userName, activeSection, onSectionChange
                         key={item.section}
                         onClick={() => onSectionChange(item.section)}
                         className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-all text-left rounded-lg mx-0 ${activeSection === item.section
-                                ? 'bg-gradient-to-r from-pink-500/15 to-purple-500/10 text-white border-l-2 border-pink-500 pl-3.5'
-                                : 'text-gray-400 hover:text-white hover:bg-[#1a1a35]'
+                            ? 'bg-gradient-to-r from-pink-500/15 to-purple-500/10 text-white border-l-2 border-pink-500 pl-3.5'
+                            : 'text-gray-400 hover:text-white hover:bg-[#1a1a35]'
                             }`}
                         style={{ margin: '1px 8px', width: 'calc(100% - 16px)' }}>
                         <span className="text-base w-5 text-center">{item.icon}</span>

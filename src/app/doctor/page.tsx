@@ -166,7 +166,7 @@ export default function DoctorPortal() {
                                             ['🚨', 'Emergency Access', 'Urgent patient data', () => setSection('emergency')],
                                         ].map(([icon, title, desc, action]) => (
                                             <button key={String(title)} onClick={action as any} className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-[#252545] transition-all text-left mb-1">
-                                                <div className="w-9 h-9 rounded-xl bg-pink-500/10 flex items-center justify-center text-lg flex-shrink-0">{icon}</div>
+                                                <div className="w-9 h-9 rounded-xl bg-pink-500/10 flex items-center justify-center text-lg flex-shrink-0">{String(icon)}</div>
                                                 <div><div className="text-sm font-semibold text-white">{String(title)}</div><div className="text-xs text-gray-500">{String(desc)}</div></div>
                                                 <span className="ml-auto text-gray-600 text-sm">→</span>
                                             </button>
