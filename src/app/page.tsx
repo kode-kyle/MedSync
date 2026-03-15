@@ -102,7 +102,7 @@ export default function HomePage() {
           🇯🇲 National Health Platform · Integrated TRN
         </div>
         <h1 className="text-5xl md:text-6xl font-extrabold mb-5 leading-tight" style={{ background: 'linear-gradient(135deg, #fff 0%, #9f67ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          Syncronizing Healthcare.
+          Syncronizing<br />Healthcare.
         </h1>
         <p className="text-lg text-gray-400 max-w-xl mb-10 leading-relaxed">
           MedSync centralizes healthcare using your TRN as a lifelong medical identifier — connecting doctors, pharmacies, and patients on one secure platform.
