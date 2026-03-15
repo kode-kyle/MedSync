@@ -41,13 +41,23 @@ export default function PharmacistPortal() {
     const lookupQR = async () => {
         if (!qrInput.trim()) { showToast('Enter a QR code or prescription ID', 'error'); return; }
         setScanning(true); setRxResult(null);
-        const { data } = await supabase
+        const { data, error } = await supabase
             .from('prescriptions')
-            .select('*, patients(full_name, trn, blood_type, allergies(allergen, severity))')
+            .select('*, patients(full_name, trn, blood_type)')
             .eq('qr_code', qrInput.trim())
             .single();
-        if (!data) { showToast('Prescription not found. Check the QR code.', 'error'); setScanning(false); return; }
-        setRxResult({ ...data, patient_name: (data as any).patients?.full_name, patient_trn: (data as any).patients?.trn });
+
+        if (error || !data) { showToast('Prescription not found. Check the QR code.', 'error'); setScanning(false); return; }
+
+        // Supabase joins can sometimes return an array or an object depending on the relationship type.
+        // We safely extract the patient details regardless of format.
+        const patientData = Array.isArray(data.patients) ? data.patients[0] : data.patients;
+
+        setRxResult({
+            ...data,
+            patient_name: patientData?.full_name,
+            patient_trn: patientData?.trn
+        });
         setScanning(false);
     };
 
