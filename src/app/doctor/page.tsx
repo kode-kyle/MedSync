@@ -372,6 +372,20 @@ function PatientRecordModal({ profile, patient, onClose, onSaved }: { profile: P
         if (!form.full_name || !form.trn) { alert('Name and TRN are required'); return; }
         setSaving(true);
         let patientId = patient?.id;
+
+        if (!patientId && form.trn) {
+            // First, try to find an existing patient by TRN to avoid duplicates
+            const { data: existingPat } = await supabase
+                .from('patients')
+                .select('id')
+                .eq('trn', form.trn)
+                .maybeSingle();
+
+            if (existingPat) {
+                patientId = existingPat.id;
+            }
+        }
+
         if (!patientId) {
             const { data: newPat } = await supabase.from('patients').insert({ trn: form.trn, full_name: form.full_name, date_of_birth: form.dob, sex: form.sex, blood_type: form.blood, phone: form.phone, email: form.email, address: form.address, emergency_contact_name: form.emName, emergency_contact_phone: form.emPhone, general_notes: form.notes }).select().single();
             patientId = newPat?.id;

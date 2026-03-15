@@ -32,10 +32,15 @@ export default function PatientPortal() {
         const { data: pat } = await supabase.from('patients').select('*').eq('profile_id', user.id).single();
         if (pat) {
             setPatient(pat);
+
+            // Fetch ALL patient records with this TRN (to handle potential legacy duplicates)
+            const { data: allRelatedPats } = await supabase.from('patients').select('id').eq('trn', pat.trn);
+            const patIds = allRelatedPats?.map(p => p.id) || [pat.id];
+
             const [rxRes, immRes, auditRes] = await Promise.all([
-                supabase.from('prescriptions').select('*').eq('trn', pat.trn).order('created_at', { ascending: false }),
-                supabase.from('immunizations').select('*').eq('patient_id', pat.id).order('date_administered', { ascending: false }),
-                supabase.from('audit_logs').select('*').eq('patient_id', pat.id).order('created_at', { ascending: false }).limit(50),
+                supabase.from('prescriptions').select('*').in('patient_id', patIds).order('created_at', { ascending: false }),
+                supabase.from('immunizations').select('*').in('patient_id', patIds).order('date_administered', { ascending: false }),
+                supabase.from('audit_logs').select('*').in('patient_id', patIds).order('created_at', { ascending: false }).limit(50),
             ]);
             setPrescriptions(rxRes.data || []);
             setImmunizations(immRes.data || []);

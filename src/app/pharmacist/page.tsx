@@ -43,7 +43,7 @@ export default function PharmacistPortal() {
         setScanning(true); setRxResult(null);
         const { data, error } = await supabase
             .from('prescriptions')
-            .select('*, patients(full_name, trn, blood_type)')
+            .select('*, patients!inner(full_name, trn, blood_type)')
             .eq('qr_code', qrInput.trim())
             .single();
 
