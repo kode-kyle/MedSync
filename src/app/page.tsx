@@ -99,10 +99,10 @@ export default function HomePage() {
       {/* HERO */}
       <section className="flex-1 flex flex-col items-center justify-center px-6 py-16 text-center max-w-4xl mx-auto w-full">
         <div className="inline-flex items-center gap-2 bg-pink-500/10 border border-pink-500/30 rounded-full px-4 py-1.5 text-xs font-semibold text-pink-400 mb-6">
-          🇯🇲 National Health Platform · Powered by TRN
+          🇯🇲 National Health Platform · Integrated TRN
         </div>
         <h1 className="text-5xl md:text-6xl font-extrabold mb-5 leading-tight" style={{ background: 'linear-gradient(135deg, #fff 0%, #9f67ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          One Record.<br />Every Patient.<br />Nationwide.
+          Syncronizing Healthcare.
         </h1>
         <p className="text-lg text-gray-400 max-w-xl mb-10 leading-relaxed">
           MedSync centralizes healthcare using your TRN as a lifelong medical identifier — connecting doctors, pharmacies, and patients on one secure platform.
