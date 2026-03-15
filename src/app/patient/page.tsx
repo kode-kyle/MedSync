@@ -33,7 +33,7 @@ export default function PatientPortal() {
         if (pat) {
             setPatient(pat);
             const [rxRes, immRes, auditRes] = await Promise.all([
-                supabase.from('prescriptions').select('*').eq('patient_id', pat.id).order('created_at', { ascending: false }),
+                supabase.from('prescriptions').select('*').eq('trn', pat.trn).order('created_at', { ascending: false }),
                 supabase.from('immunizations').select('*').eq('patient_id', pat.id).order('date_administered', { ascending: false }),
                 supabase.from('audit_logs').select('*').eq('patient_id', pat.id).order('created_at', { ascending: false }).limit(50),
             ]);
